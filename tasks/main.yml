@@ -2,3 +2,6 @@
 - name: Run optional versionscheck
   ansible.builtin.include_tasks: versioncheck.yml
   when: submodules_versioncheck | bool
+
+- name: Create Etebase User/Group
+  ansible.builtin.include_tasks: create_user.yml

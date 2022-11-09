@@ -1,3 +1,9 @@
 ---
+# Unix vars
+etebase_group: 'etebase'
+etebase_user: 'etebase'
+etebase_user_home: '/var/lib/etebase'
+etebase_shell: '/bin/false'
+
 # should we do a version check? (recomended)
 submodules_versioncheck: false

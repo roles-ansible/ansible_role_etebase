@@ -1,0 +1,18 @@
+---
+- name: "Create EteBase Group"
+  become: true
+  ansible.builtin.group:
+    name: "{{ etebase_group }}"
+    system: true
+    state: "present"
+
+- name: "Create Etebase User"
+  become: true
+  ansible.builtin.user:
+    name: "{{ etebase_user }}"
+    comment: "Etebase User"
+    group: "{{ etebase_group }}"
+    groups: "{{ etebase_groups | default(omit) }}"
+    home: "{{ etebase_user_home }}"
+    shell: "{{ etebase_shell }}"
+    system: true
