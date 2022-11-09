@@ -10,15 +10,15 @@
   ansible.builtin.pip:
     name: bottle
     # requirements: /my_app/requirements.txt
-    virtualenv: "{{ etebase_venv }}"
-    state: "{{ etebase_package_state }}"
+    virtualenv: "{{ etebase__venv }}"
+    state: "{{ etebase__package_state }}"
     umask: "0027"
 
 - name: Fix venv File owner/group
   become: true
   ansible.builtin.file:
-    path: "{{ etebase_venv }}"
+    path: "{{ etebase__venv }}"
     state: directory
     mode: 'u=rwX,g=rX,o='
-    group: "{{ etebase_group }}"
-    owner: "{{ etebase_user }}"
+    group: "{{ etebase__group }}"
+    owner: "{{ etebase__user }}"
