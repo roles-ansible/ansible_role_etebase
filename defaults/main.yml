@@ -1,13 +1,38 @@
 ---
 # Unix vars
-etebase_group: 'etebase'
-etebase_user: 'etebase'
-etebase_user_home: '/var/lib/etebase'
-etebase_shell: '/bin/false'
-etebase_venv: '/tmp/venv'
+etebase__group: 'etebase'
+etebase__user: 'etebase'
+etebase__user_home: '/var/lib/etebase'
+etebase__shell: '/bin/false'
+etebase__venv: '/tmp/venv'
 
 # package state
-etebase_package_state: 'present'
+etebase__package_state: 'present'
+
+# etebase version
+etebase__version: 'latest'
+
+# etebase config options
+# -> global
+etebase__global_secret_file: 'secret.txt'
+etebase__global_debug: false
+etebase__global_static_root: "{{ etebase__user_home }}/static_root"
+etebase__global_media_root: "{{ etebase__user_home }}/media_root"
+etebase__global_extra: ''
+
+# -> allowed_hosts
+etebase__allowed_hosts_allowed_host1: '*'
+etebase__allowed_hosts_extra: ''
+
+# -> Database
+etebase__database_engine: 'django.db.backends.sqlite3'
+etebase__database_name: 'etebase.db.sqlite3'
+etebase__database_extra: ''
+etebase__database_options_extra: ''
+
+# -> Other
+etebase__ldap_extra: ''
+etebase__config_extra: ''
 
 # should we do a version check? (recomended)
 submodules_versioncheck: false

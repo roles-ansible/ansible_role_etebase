@@ -1,0 +1,23 @@
+---
+- name: Configure Etebase
+  become: true
+  ansible.builtin.template:
+    src: "templates/etebase-server.ini.j2"
+    dest: "{{ etebase__user_home }}/etebase_{{ etebase_version_target }}/etebase-server.ini"
+    mode: '0640'
+    group: "{{ etebase__group }}"
+    owner: "{{ etebase__user }}"
+
+
+- name: "Create istatic data directory"
+  become: true
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: directory
+    group: "{{ etebase__group }}"
+    owner: "{{ etebase__user }}"
+    recurse: true
+    mode: 'u=rwX,g=rX,o='
+  with_items:
+    - "{{ etebase__global_static_root }}"
+    - "{{ etebase__global_media_root }}"

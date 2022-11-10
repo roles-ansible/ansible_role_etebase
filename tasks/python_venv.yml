@@ -8,8 +8,15 @@
 - name: Install etebase python requirements in virtualenv
   become: true
   ansible.builtin.pip:
-    name: bottle
-    # requirements: /my_app/requirements.txt
+    requirements: "{{ etebase__user_home }}/etebase_{{ etebase_version_target }}/requirements.txt"
+    virtualenv: "{{ etebase__venv }}"
+    state: "{{ etebase__package_state }}"
+    umask: "0027"
+
+- name: Install etebase ASGI Server
+  become: true
+  ansible.builtin.pip:
+    name: 'uvicorn[standard]'
     virtualenv: "{{ etebase__venv }}"
     state: "{{ etebase__package_state }}"
     umask: "0027"
@@ -20,5 +27,6 @@
     path: "{{ etebase__venv }}"
     state: directory
     mode: 'u=rwX,g=rX,o='
+    recurse: true
     group: "{{ etebase__group }}"
     owner: "{{ etebase__user }}"

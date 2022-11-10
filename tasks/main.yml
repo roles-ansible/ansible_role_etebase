@@ -6,5 +6,14 @@
 - name: Create Etebase User/Group
   ansible.builtin.include_tasks: create_user.yml
 
+- name: Define Etebase Version
+  ansible.builtin.include_tasks: set_version.yml
+
+- name: Download Etebase Repo
+  ansible.builtin.include_tasks: download.yml
+
 - name: Setup Virtualenv and install Requirements
   ansible.builtin.include_tasks: python_venv.yml
+
+- name: Create Etebase Config
+  ansible.builtin.include_tasks: configure.yml

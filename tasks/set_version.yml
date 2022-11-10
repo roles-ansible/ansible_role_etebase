@@ -1,0 +1,38 @@
+---
+- name: "Determine 'latest' version release"
+  when: etebase__version == "latest"
+  block:
+    - name: "Get latest etebase release metadata"
+      ansible.builtin.uri:
+        url: "{{ etebase__repo_api }}"
+        return_content: true
+      register: etebase_remote_metadata
+      when: not ansible_check_mode
+
+    - name: "Fail if running in check mode without versions set."
+      ansible.builtin.fail:
+        msg: |
+          "You are running this playbook in check mode:
+          Please set the Etebase version with the variable 'etebase__version', because the
+          URI module cannot detect the latest version in this mode."
+      when: ansible_check_mode and (etebase__version == 'latest' or etebase__version == 'present')
+
+    - name: "Set fact latest etebase release"
+      ansible.builtin.set_fact:
+        etebase_remote_version: "{{ etebase_remote_metadata.json.0.name }}"
+      when: not ansible_check_mode
+
+    - name: "Set etebase version target (latest)"
+      ansible.builtin.set_fact:
+        etebase_version_target: "{{ etebase_remote_version }}"
+      when: not ansible_check_mode
+
+- name: "Set etebase version target {{ etebase__version }}"
+  ansible.builtin.set_fact:
+    etebase_version_target: "{{ etebase__version }}"
+  when: etebase__version != "latest"
+
+- name: Print Etebase Version
+  ansible.builtin.debug:
+    verbosity: 1
+    msg: "Set Etebase Version to {{ etebase_version_target }}"

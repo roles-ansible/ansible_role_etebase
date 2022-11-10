@@ -1,0 +1,23 @@
+---
+- name: Download etebase git Repository
+  become: true
+  ansible.builtin.git:
+    repo: "{{ etebase__repo }}"
+    dest: "{{ etebase__user_home }}/etebase_{{ etebase_version_target }}"
+    single_branch: true
+    depth: 4
+    force: false
+    track_submodules: true
+    umask: "0027"
+    update: false
+    version: "{{ etebase_version_target }}"
+
+- name: Fix venv File owner/group
+  become: true
+  ansible.builtin.file:
+    path: "{{ etebase__user_home }}/etebase_{{ etebase_version_target }}"
+    state: directory
+    mode: 'u=rwX,g=rX,o='
+    recurse: true
+    group: "{{ etebase__group }}"
+    owner: "{{ etebase__user }}"
