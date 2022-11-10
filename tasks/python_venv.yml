@@ -1,0 +1,24 @@
+---
+- name: Install Python3 Virtualenv
+  become: true
+  ansible.builtin.package:
+    name: python3-virtualenv
+    state: present
+
+- name: Install etebase python requirements in virtualenv
+  become: true
+  ansible.builtin.pip:
+    name: bottle
+    # requirements: /my_app/requirements.txt
+    virtualenv: "{{ etebase_venv }}"
+    state: "{{ etebase_package_state }}"
+    umask: "0027"
+
+- name: Fix venv File owner/group
+  become: true
+  ansible.builtin.file:
+    path: "{{ etebase_venv }}"
+    state: directory
+    mode: 'u=rwX,g=rX,o='
+    group: "{{ etebase_group }}"
+    owner: "{{ etebase_user }}"

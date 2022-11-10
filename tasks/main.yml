@@ -5,3 +5,6 @@
 
 - name: Create Etebase User/Group
   ansible.builtin.include_tasks: create_user.yml
+
+- name: Setup Virtualenv and install Requirements
+  ansible.builtin.include_tasks: python_venv.yml
