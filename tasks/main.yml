@@ -20,3 +20,7 @@
 
 - name: Run ./manage.py migrate
   ansible.builtin.include_tasks: migrate.yml
+
+- name: Setup Systemd Service
+  ansible.builtin.include_tasks: systemd.yml
+  when: etebase__systemd_setup | bool

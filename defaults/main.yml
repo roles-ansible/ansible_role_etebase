@@ -5,6 +5,7 @@ etebase__user: 'etebase'
 etebase__user_home: '/var/lib/etebase'
 etebase__shell: '/bin/false'
 etebase__venv: "{{ etebase__user_home }}/venv"
+etebase__socket: '/tmp/etebase_server.sock'
 
 # package state
 etebase__package_state: 'present'
@@ -37,6 +38,11 @@ etebase__database_options_extra: ''
 # -> Other
 etebase__ldap_extra: ''
 etebase__config_extra: ''
+
+# webosting
+etebase__restart_webserver: false
+etebase__webserver_service: 'nginx.service'
+etebase__systemd_setup: false
 
 # should we do a version check? (recomended)
 submodules_versioncheck: false

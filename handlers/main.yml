@@ -1,0 +1,14 @@
+---
+- name: "Systemctl restart etebase.service"
+  become: true
+  ansible.builtin.service:
+    name: etebase.service
+    state: restarted
+  when: ansible_service_mgr == "systemd"
+
+- name: "Systemctl restart webserver"
+  become: true
+  ansible.builtin.systemd:
+    name: "{{ etebase__webserver_service }}"
+    state: restarted
+  when: ansible_service_mgr == "systemd" and etebase__restart_webserver | bool

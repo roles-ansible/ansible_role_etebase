@@ -1,0 +1,17 @@
+---
+- name: "Setup systemd service"
+  become: true
+  ansible.builtin.template:
+    src: 'templates/etebase.service.j2'
+    dest: /lib/systemd/system/etebase.service
+    owner: root
+    group: root
+    mode: 0644
+  notify:
+    - "Systemctl restart etebase.service"
+    - "Systemctl restart webserver"
+
+- name: "Reload systemd"
+  become: true
+  ansible.builtin.systemd:
+    daemon_reload: true
