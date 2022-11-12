@@ -1,0 +1,7 @@
+---
+- name: Run python3 manage.py migrate
+  become: true
+  ansible.builtin.command:
+    chdir: "{{ etebase__user_home }}/etebase_{{ etebase_version_target }}"
+    cmd: "{{ etebase__venv }}/bin/python3 ./manage.py migrate"
+  changed_when: _etebase_download.changed or _etebase_config.changed

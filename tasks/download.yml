@@ -11,6 +11,7 @@
     umask: "0027"
     update: false
     version: "{{ etebase_version_target }}"
+  register: _etebase_download
 
 - name: Fix venv File owner/group
   become: true

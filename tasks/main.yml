@@ -17,3 +17,6 @@
 
 - name: Create Etebase Config
   ansible.builtin.include_tasks: configure.yml
+
+- name: Run ./manage.py migrate
+  ansible.builtin.include_tasks: migrate.yml
