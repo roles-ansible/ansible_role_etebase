@@ -9,7 +9,7 @@
     owner: "{{ etebase__user }}"
 
 
-- name: "Create istatic data directory"
+- name: "Create static data directorys"
   become: true
   ansible.builtin.file:
     path: "{{ item }}"
@@ -21,3 +21,4 @@
   with_items:
     - "{{ etebase__global_static_root }}"
     - "{{ etebase__global_media_root }}"
+    - "{{ etebase__secrets_dir }}"

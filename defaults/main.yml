@@ -4,17 +4,18 @@ etebase__group: 'etebase'
 etebase__user: 'etebase'
 etebase__user_home: '/var/lib/etebase'
 etebase__shell: '/bin/false'
-etebase__venv: '/tmp/venv'
+etebase__venv: "{{ etebase__user_home }}/venv"
 
 # package state
 etebase__package_state: 'present'
 
 # etebase version
 etebase__version: 'latest'
+etebase__secrets_dir: "{{ etebase__user_home }}/secrets"
 
 # etebase config options
 # -> global
-etebase__global_secret_file: 'secret.txt'
+etebase__global_secret_file: '{{ etebase__secrets_dir }}/secret.txt'
 etebase__global_debug: false
 etebase__global_static_root: "{{ etebase__user_home }}/static_root"
 etebase__global_media_root: "{{ etebase__user_home }}/media_root"
@@ -26,7 +27,7 @@ etebase__allowed_hosts_extra: ''
 
 # -> Database
 etebase__database_engine: 'django.db.backends.sqlite3'
-etebase__database_name: 'etebase.db.sqlite3'
+etebase__database_name: "{{ etebase__secrets_dir }}/etebase.db.sqlite3"
 etebase__database_extra: ''
 etebase__database_options_extra: ''
 
