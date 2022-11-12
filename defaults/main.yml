@@ -13,6 +13,9 @@ etebase__package_state: 'present'
 etebase__version: 'latest'
 etebase__secrets_dir: "{{ etebase__user_home }}/secrets"
 
+# hosting
+etebase__collectstatic: true
+
 # etebase config options
 # -> global
 etebase__global_secret_file: '{{ etebase__secrets_dir }}/secret.txt'
