@@ -13,7 +13,7 @@
     cmd: "{{ etebase__venv }}/bin/python3 ./manage.py collectstatic"
     creates: "{{ etebase__global_static_root }}/admin"
 
-- name: "Fix File Permissions for static data directorys"
+- name: "Fix File Permissions for secret directory"
   become: true
   ansible.builtin.file:
     path: "{{ item }}"
@@ -23,5 +23,16 @@
     recurse: true
     mode: 'u=rwX,g=rX,o='
   with_items:
-    - "{{ etebase__global_static_root }}"
     - "{{ etebase__secrets_dir }}"
+
+- name: "Fix File Permissions for static data directory"
+  become: true
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: directory
+    group: "{{ etebase__group }}"
+    owner: "{{ etebase__user }}"
+    recurse: true
+    mode: 'u=rwX,g=rX,o=rX'
+  with_items:
+    - "{{ etebase__global_static_root }}"
