@@ -11,4 +11,17 @@
   ansible.builtin.command:
     chdir: "{{ etebase__user_home }}/etebase_{{ etebase_version_target }}"
     cmd: "{{ etebase__venv }}/bin/python3 ./manage.py collectstatic"
-  changed_when: _etebase_download.changed or _etebase_config.changed
+    creates: "{{ etebase__global_static_root }}/admin"
+
+- name: "Fix File Permissions for static data directorys"
+  become: true
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: directory
+    group: "{{ etebase__group }}"
+    owner: "{{ etebase__user }}"
+    recurse: true
+    mode: 'u=rwX,g=rX,o='
+  with_items:
+    - "{{ etebase__global_static_root }}"
+    - "{{ etebase__secrets_dir }}"
