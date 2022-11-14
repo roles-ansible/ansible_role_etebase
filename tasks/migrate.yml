@@ -10,7 +10,7 @@
 - name: Print output of python3 manage.py migrate
   ansible.builtin.debug:
     verbosity: 1
-    msg: "{{ _etebase_migrate.result }}"
+    msg: "{{ _etebase_migrate.stdout }}"
 
 - name: Create static files
   become: true
@@ -23,7 +23,7 @@
 - name: Print output of python3 manage.py collectstatic
   ansible.builtin.debug:
     verbosity: 1
-    msg: "{{ _etebase_collectstatic.result }}"
+    msg: "{{ _etebase_collectstatic.stdout }}"
 
 - name: "Fix File Permissions for secret directory"
   become: true
@@ -51,8 +51,5 @@
 
 - name: Print hint how to create admin User
   ansible.builtin.debug:
-    msg: |
-      To create a admin user, run
-      'cd {{ etebase__user_home }}/etebase_{{ etebase_version_target }};
-      {{ etebase__venv }}/bin/python3 ./manage.py createsuperuser'
-      as priviledged user.
+    # yamllint disable-line rule:line-length
+    msg: "To create a admin user, run 'cd {{ etebase__user_home }}/etebase_{{ etebase_version_target }}; {{ etebase__venv }}/bin/python3 ./manage.py createsuperuser' as priviledged user."
