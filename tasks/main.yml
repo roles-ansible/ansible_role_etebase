@@ -24,3 +24,6 @@
 - name: Setup Systemd Service
   ansible.builtin.include_tasks: systemd.yml
   when: etebase__systemd_setup | bool
+
+- name: Cleanup file permissions
+  ansible.builtin.include_tasks: filepermissions.yml

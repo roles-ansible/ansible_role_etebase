@@ -1,15 +1,5 @@
 ---
-- name: Configure Etebase
-  become: true
-  ansible.builtin.template:
-    src: "templates/etebase-server.ini.j2"
-    dest: "{{ etebase__user_home }}/etebase_{{ etebase_version_target }}/etebase-server.ini"
-    mode: '0640'
-    group: "{{ etebase__group }}"
-    owner: "{{ etebase__user }}"
-  register: _etebase_config
-
-- name: "Create static data directorys"
+- name: "Make sure static data is set properly"
   become: true
   ansible.builtin.file:
     path: "{{ item }}"
@@ -21,7 +11,7 @@
   with_items:
     - "{{ etebase__global_static_root }}"
 
-- name: "Create media data directorys"
+- name: "Set and cleanup file permissions again"
   become: true
   ansible.builtin.file:
     path: "{{ item }}"
@@ -33,3 +23,5 @@
   with_items:
     - "{{ etebase__global_media_root }}"
     - "{{ etebase__secrets_dir }}"
+    - "{{ etebase__venv }}"
+    - "{{ etebase__user_home }}/etebase_{{ etebase_version_target }}"
