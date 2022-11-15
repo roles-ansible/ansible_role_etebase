@@ -1,0 +1,28 @@
+---
+galaxy_info:
+  role_name: etebase
+  author: do1jlr
+  description: Ansible role to Setup and Confugure Etebase - The Backend from EteSync 2.0.
+  license: "MIT"
+  min_ansible_version: "2.12"
+  platforms:
+    - name: Debian
+      versions: ['all']
+    - name: Ubuntu
+      versions: ['all']
+    - name: Fedora
+      versions: ['all']
+    - name: EL
+      versions: ['all']
+    - name: ArchLinux
+      versions: ['all']
+  galaxy_tags:
+    - etebase
+    - etesync
+    - synchronisation
+    - encryption
+    - e2eencryption
+    - endtoend
+    - tasks
+    - calendar
+dependencies: []
