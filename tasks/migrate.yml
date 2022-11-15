@@ -52,4 +52,4 @@
 - name: Print hint how to create admin User
   ansible.builtin.debug:
     # yamllint disable-line rule:line-length
-    msg: "To create a admin user, run 'cd {{ etebase__user_home }}/etebase_{{ etebase_version_target }}; {{ etebase__venv }}/bin/python3 ./manage.py createsuperuser' as priviledged user."
+    msg: "To create a admin user, run 'cd {{ etebase__user_home }}/etebase_{{ etebase_version_target }}; source {{ etebase__venv }}/bin/activate; python3 ./manage.py createsuperuser' as priviledged user."

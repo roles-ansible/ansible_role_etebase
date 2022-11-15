@@ -9,6 +9,7 @@ Ansible role to Setup and Confugure Etebase - The Backend from [EteSync](https:/
 ---------
 This Ansible role installs and configures etebase, the backend of etesync. A piece of software to securely sync your contacts, calendars, tasks and notes!
 In this Ansible role, a separate user is created for etebase. The latest release of etebase is downloaded to the home of this user. A configuration is created. The specified Python dependencies are installed in a venv. And optionally etebase can be started automatically via a systemd service and uvicorn.
+
 This Ansible role does not create users in Etebase. And the configuration for the web server is not created either. More about this in the [Additional Information](#additional-information) section.
 
  Default Variables
@@ -19,7 +20,7 @@ This Ansible role does not create users in Etebase. And the configuration for th
 | etebase__group | ``etebase`` | The Unix Group for etebase |
 | etebase__user_home | ``/var/lib/etebase`` | Etebase User Home |
 | etebase__shell | ``/bin/false`` | Default Shell of Etebase User |
-| etebase__venv | ``{{ etebase__user_home }}/venv`` | Etebase venv path |
+| etebase__venv_path | ``{{ etebase__user_home }}/venv`` | Etebase venv path |
 | etebase__socket | ``/tmp/etebase_server.sock`` | Etebase Socket path *(only if ``etebase__systemd_setup`` is set to ``true``)* |
 | etebase__package_state | ``present`` | Set to ``latest`` to upgrade all etebase required system and pip packages to the latest version |
 | etebase__version | ``latest`` | Etebase Release Tag |
@@ -60,14 +61,15 @@ You have to create a admin User by yourself. To do this, log in manually as priv
 cd /var/lib/etebase/
 
 # change to latest etebase version
-ls etebase_*
+ls -l etebase_*
 cd etebase_v0.10.0  # example versiom
 
-# enable venv
-source /var/lib/etebase/venv/bin/activate
+# enable latest venv
+ls -l /var/lib/etebase/venv
+source /var/lib/etebase/venv/v0.10.0/bin/activate  # example version
 
 # create new superuser
-/var/lib/etebase/venv/bin/python3 ./manage.py createsuperuser
+python3 ./manage.py createsuperuser
 ```
 
 By the way, this role requires that the Ansible user be allowed to execute commands with sudo privileges.
