@@ -1,4 +1,12 @@
 ---
+- name: Update apt cache
+  become: true
+  ansible.builtin.apt:
+    cache_valid_time: 3600
+    update_cache: true
+  when:
+    - ansible_pkg_mgr == "apt"
+
 - name: Install Python3 Virtualenv
   become: true
   ansible.builtin.package:

@@ -3,5 +3,5 @@ etebase__repo: 'https://github.com/etesync/server.git'
 etebase__repo_api: 'https://api.github.com/repos/etesync/server/tags'
 
 # versionscheck
-playbook_version_number: 8   # should be a integer
+playbook_version_number: 9   # should be a integer
 playbook_version_path: 'role-etebase'
