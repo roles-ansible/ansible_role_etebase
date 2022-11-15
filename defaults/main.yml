@@ -4,7 +4,7 @@ etebase__group: 'etebase'
 etebase__user: 'etebase'
 etebase__user_home: '/var/lib/etebase'
 etebase__shell: '/bin/false'
-etebase__venv: "{{ etebase__user_home }}/venv"
+etebase__venv_path: "{{ etebase__user_home }}/venv"
 etebase__socket: '/tmp/etebase_server.sock'
 
 # package state
