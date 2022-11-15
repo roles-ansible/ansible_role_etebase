@@ -3,12 +3,12 @@
 
  Ansible role EteBase - EteSync 2.0 Server Backend
 ===================================================
-Ansible role to Setup and Confugure Etebase - The Backend from EteSync 2.0 -> https://github.com/etesync/server
+Ansible role to Setup and Confugure Etebase - The Backend from [EteSync](https://www.etesync.com/) 2.0 -> [https://github.com/etesync/server](https://github.com/etesync/server.git).
 
  Details
 ---------
 This Ansible role installs and configures etebase, the backend of etesync. A piece of software to securely sync your contacts, calendars, tasks and notes!
-In this Ansible role, a separate user is created for etebase. The latest release of etebase is downloaded to the home of this user. A configuration is created. The specified Python dependencies are installed in a venv. And optionally etebase can be started automatically via a systemd service and uvicor.
+In this Ansible role, a separate user is created for etebase. The latest release of etebase is downloaded to the home of this user. A configuration is created. The specified Python dependencies are installed in a venv. And optionally etebase can be started automatically via a systemd service and uvicorn.
 This Ansible role does not create users in Etebase. And the configuration for the web server is not created either. More about this in the [Additional Information](#additional-information) section.
 
  Default Variables
@@ -52,14 +52,21 @@ This Ansible role does not create users in Etebase. And the configuration for th
 
  Additional Information
 ------------------------
-You find more information about the webserver config at [github.com/etesync/server/wiki/Production-setup-using-Nginx](https://github.com/etesync/server/wiki/Production-setup-using-Nginx). Please remember the value you used for the ``etebase__socket`` variable, if you used this role to start the [uvicor](https://www.uvicorn.org/) ASGI server via systemd. For this you have to set ``etebase__systemd_setup`` to ``true``.
+You find more information about the webserver config at [github.com/etesync/server/wiki/Production-setup-using-Nginx](https://github.com/etesync/server/wiki/Production-setup-using-Nginx). Please remember the value you used for the ``etebase__socket`` variable, if you used this role to start the [uvicorn](https://www.uvicorn.org/) ASGI server via systemd. For this you have to set ``etebase__systemd_setup`` to ``true``.
 
 You have to create a admin User by yourself. To do this, log in manually as priviledged user, change to the ``etebase__user_home``. Enter the downloaded etebase code direcotory and run the ``python3 ./manage.py createsuperuser`` command in the venv:
 ```bash
+# go to etebase home
 cd /var/lib/etebase/
+
+# change to latest etebase version
 ls etebase_*
 cd etebase_v0.10.0  # example versiom
+
+# enable venv
 source /var/lib/etebase/venv/bin/activate
+
+# create new superuser
 /var/lib/etebase/venv/bin/python3 ./manage.py createsuperuser
 ```
 
