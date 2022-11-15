@@ -43,7 +43,7 @@ What this Ansible role does not create are users in Etebase. And the configurati
 | etebase__allowed_hosts_allowed_host1 | ``*`` | The allowed Host for this etebase server | 
 | etebase__allowed_hosts_extra | |Variable for aditional parameter in the ``[allowed_hosts]`` section of the config file |
 | etebase__database_engine | ``django.db.backends.sqlite3`` | Databse Engine |
-| etebase__database_name | "{{ etebase__secrets_dir }}/etebase.db.sqlite3" | Path of the sqlite3 database |
+| etebase__database_name | ``{{ etebase__secrets_dir }}/etebase.db.sqlite3`` | Path of the sqlite3 database |
 | etebase__database_extra | | Variable for aditional parametet in the ``[database]`` section of the config file |
 | etebase__database_options_extra | | Variable for aditional parameter in the ``[database_options]`` section of the config file |
 | etebase__ldap_extra | | Variable for aditional parameter in the ``[ldap]`` section of the config file |
