@@ -64,6 +64,20 @@ cd etebase_v0.10.0  # example versiom
 
 By the way, this role requires that the Ansible user be allowed to execute commands with sudo privileges.
 
+ Example Playbook
+------------------
+```yml
+---
+- name: Install etebase server
+  hosts: localhost
+  roles:
+    - {role: do1jlr.etebase, tags: etebase}
+  vars:
+    etebase__allowed_hosts_allowed_host1: 'example.com'
+    etebase__systemd_setup: true
+    submodules_versioncheck: true
+```
+
  Contributing
 --------------
 Don't hesitate to open a issue or *(even better)* create a pull request.
