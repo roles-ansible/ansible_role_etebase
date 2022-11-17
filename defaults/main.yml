@@ -14,6 +14,11 @@ etebase__package_state: 'present'
 etebase__version: 'latest'
 etebase__secrets_dir: "{{ etebase__user_home }}/secrets"
 
+# backup
+etebase__create_backup: false
+etebase__backup_destionation: "{{ etebase__user_home }}/backup"
+etebase__backup_sqlite: true
+
 # hosting
 etebase__collectstatic: true
 

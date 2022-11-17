@@ -5,6 +5,9 @@
     name: "{{ etebase__group }}"
     system: true
     state: "present"
+  notify:
+    - "Systemctl restart etebase.service"
+    - "Systemctl restart webserver"
 
 - name: "Create Etebase User"
   become: true
@@ -16,3 +19,7 @@
     home: "{{ etebase__user_home }}"
     shell: "{{ etebase__shell }}"
     system: true
+  register: _user
+  notify:
+    - "Systemctl restart etebase.service"
+    - "Systemctl restart webserver"

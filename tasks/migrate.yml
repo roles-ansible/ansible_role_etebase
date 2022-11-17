@@ -19,6 +19,9 @@
     cmd: "{{ etebase__venv }}/bin/python3 ./manage.py collectstatic"
     creates: "{{ etebase__global_static_root }}/admin"
   register: _etebase_collectstatic
+  notify:
+    - "Systemctl restart etebase.service"
+    - "Systemctl restart webserver"
 
 - name: Print output of python3 manage.py collectstatic
   ansible.builtin.debug:

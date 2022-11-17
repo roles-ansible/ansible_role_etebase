@@ -20,6 +20,9 @@
     virtualenv: "{{ etebase__venv }}"
     state: "{{ etebase__package_state }}"
     umask: "0027"
+  notify:
+    - "Systemctl restart etebase.service"
+    - "Systemctl restart webserver"
 
 - name: Install etebase ASGI Server
   become: true
@@ -28,6 +31,9 @@
     virtualenv: "{{ etebase__venv }}"
     state: "{{ etebase__package_state }}"
     umask: "0027"
+  notify:
+    - "Systemctl restart etebase.service"
+    - "Systemctl restart webserver"
 
 - name: Fix venv File owner/group
   become: true
