@@ -29,7 +29,7 @@ This Ansible role does not create users in Etebase. And the configuration for th
 | etebase__restart_webserver | ``false`` | Set to ``true`` to restart the webserver on config change *(etebase__systemd_setup needed)*|
 | etebase__webserver_service | ``nginx.service`` | Which systemd unit should be restartet for the webserver |
 | etebase__systemd_setup | ``false`` | Set to ``true`` to start etebase as systemd unit with the systemd socket configured above |
-| etebase__create_backup | ``false`` | Should this role create a backup bevore upgrading etebase |
+| etebase__create_backup | ``false`` | Should this role create a backup before upgrading etebase |
 | etebase__backup_destionation | ``{{ etebase__user_home }}/backup`` | Destination directory for backup |
 | etebase__backup_sqlite | ``true`` | If we do a backup we could skipping the sqlite3 database by flipping this |
 | submodules_versioncheck | ``false`` | should we do a simple version check for this ansible role |
