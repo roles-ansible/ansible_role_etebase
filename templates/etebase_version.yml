@@ -1,0 +1,3 @@
+---
+{{ ansible_managed | comment }}
+last_etebase_version_target: '{{ etebase_version_target }}'

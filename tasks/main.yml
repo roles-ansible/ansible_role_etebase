@@ -9,6 +9,10 @@
 - name: Define Etebase Version
   ansible.builtin.include_tasks: set_version.yml
 
+- name: Run optional etebase backup
+  ansible.builtin.include_tasks: backup.yml
+  when: etebase__create_backup | bool
+
 - name: Download Etebase Repo
   ansible.builtin.include_tasks: download.yml
 

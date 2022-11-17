@@ -12,6 +12,9 @@
     update: false
     version: "{{ etebase_version_target }}"
   register: _etebase_download
+  notify:
+    - "Systemctl restart etebase.service"
+    - "Systemctl restart webserver"
 
 - name: Fix venv File owner/group
   become: true

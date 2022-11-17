@@ -1,0 +1,99 @@
+---
+- name: Try to read variable from remote server
+  block:
+    - name: "Read yaml file"
+      become: true
+      ansible.builtin.command: "cat {{ etebase__user_home }}/etebase_version.yml"
+      changed_when: _user.changed | bool
+      register: _vars
+
+    - name: "Parse yaml into variable"
+      ansible.builtin.set_fact:
+        remote_vars: "{{ _vars.stdout | from_yaml }}"
+  rescue:
+    - name: Fail if last version can not be detected
+      ansible.builtin.fail:
+        msg: "Backup Failed. If you run this role the first time you can not backup anything because nothing is installed yet."
+
+- name: "Create Backup of {{ remote_vars.last_etebase_version_target }}"
+  when: remote_vars.last_etebase_version_target != etebase_version_target
+  block:
+    - name: Set current backup dir
+      ansible.builtin.set_fact:
+        # yamllint disable-line rule:line-length
+        etebase__current_backup_destination: "{{ etebase__backup_destionation }}/{{ remote_vars.last_etebase_version_target }}_{{ ansible_date_time.iso8601_micro }}"
+
+    - name: Create etebase backup directory
+      become: true
+      ansible.builtin.file:
+        path: "{{ item }}"
+        state: directory
+        mode: 'u=rwX,g=rX,o='
+        recurse: true
+        group: "{{ etebase__group }}"
+        owner: "{{ etebase__user }}"
+      with_items:
+        - "{{ etebase__backup_destionation }}"
+        - "{{ etebase__current_backup_destination }}"
+
+    - name: Install sqlite3 requirements
+      become: true
+      ansible.builtin.package:
+        name: 'sqlite3'
+        state: "{{ etebase__package_state }}"
+      when: etebase__backup_sqlite | bool
+
+    - name: Create Backup of sqlite3 database
+      become: true
+      ansible.builtin.command:
+        cmd: "sqlite3 {{ etebase__database_name }} \".backup '{{ etebase__current_backup_destination }}/etebase_backup.db.sqlite3'\""
+        creates: "{{ etebase__current_backup_destination }}/etebase_backup.db.sqlite3"
+      when: etebase__backup_sqlite | bool
+
+    - name: Make sure file permissions fit
+      become: true
+      ansible.builtin.file:
+        path: "{{ item }}"
+        state: directory
+        mode: 'u=rwX,g=rX,o='
+        recurse: true
+        group: "{{ etebase__group }}"
+        owner: "{{ etebase__user }}"
+      with_items:
+        - "{{ etebase__current_backup_destination }}"
+
+    - name: Backup static root dir
+      become: true
+      ansible.builtin.copy:
+        directory_mode: 0750
+        mode: 0640
+        group: "{{ etebase__group }}"
+        owner: "{{ etebase__user }}"
+        src: "{{ etebase__global_static_root }}"
+        dest: "{{ etebase__current_backup_destination }}"
+        remote_src: true
+
+    - name: Backup media root dir
+      become: true
+      ansible.builtin.copy:
+        directory_mode: 0750
+        mode: 0640
+        owner: "{{ etebase__user }}"
+        group: "{{ etebase__group }}"
+        src: "{{ etebase__global_media_root }}"
+        dest: "{{ etebase__current_backup_destination }}"
+        remote_src: true
+
+    - name: Create bz2 archive of backup
+      become: true
+      community.general.archive:
+        mode: 0640
+        owner: "{{ etebase__user }}"
+        group: "{{ etebase__group }}"
+        path:
+          - "{{ etebase__current_backup_destination }}"
+          - "{{ etebase__user_home }}/etebase_{{ remote_vars.last_etebase_version_target }}"
+          - "{{ etebase__venv_path }}/{{ remote_vars.last_etebase_version_target }}"
+        dest: "{{ etebase__current_backup_destination }}.tar.bz2"
+        format: bz2
+        remove: true

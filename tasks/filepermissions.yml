@@ -10,6 +10,9 @@
     mode: 'u=rwX,g=rX,o=rX'
   with_items:
     - "{{ etebase__global_static_root }}"
+  notify:
+    - "Systemctl restart etebase.service"
+    - "Systemctl restart webserver"
 
 - name: "Set and cleanup file permissions again"
   become: true
@@ -25,3 +28,6 @@
     - "{{ etebase__secrets_dir }}"
     - "{{ etebase__venv }}"
     - "{{ etebase__user_home }}/etebase_{{ etebase_version_target }}"
+  notify:
+    - "Systemctl restart etebase.service"
+    - "Systemctl restart webserver"
