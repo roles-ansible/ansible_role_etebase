@@ -3,3 +3,5 @@
 # {{ ansible_managed }}
 #
 last_etebase_version_target: '{{ etebase_version_target }}'
+last_etebase_repo_dir: '{{ etebase__user_home }}/etebase_{{ etebase_version_target }}'
+last_etebase_venv_dir: '{{ etebase__venv }}'
