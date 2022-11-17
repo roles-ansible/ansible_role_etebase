@@ -92,8 +92,8 @@
         group: "{{ etebase__group }}"
         path:
           - "{{ etebase__current_backup_destination }}"
-          - "{{ etebase__user_home }}/etebase_{{ remote_vars.last_etebase_version_target }}"
-          - "{{ etebase__venv_path }}/{{ remote_vars.last_etebase_version_target }}"
+          - "{{ remote_vars.last_etebase_repo_dir }}"
+          - "{{ remote_vars.last_etebase_venv_dir }}"
         dest: "{{ etebase__current_backup_destination }}.tar.bz2"
         format: bz2
         remove: true
