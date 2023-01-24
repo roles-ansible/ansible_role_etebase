@@ -4,5 +4,5 @@ etebase__repo_api: 'https://api.github.com/repos/etesync/server/tags'
 etebase__venv: "{{ etebase__venv_path }}/{{ etebase_version_target }}"
 
 # versionscheck
-playbook_version_number: 13   # should be a integer
+playbook_version_number: 14   # should be a integer
 playbook_version_path: 'role-do1jlr.etebase'
