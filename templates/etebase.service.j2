@@ -6,6 +6,7 @@ Description=Execute the etebase server.
 [Service]
 WorkingDirectory={{ etebase__user_home }}/etebase_{{ etebase_version_target }}
 ExecStart={{ etebase__venv }}/bin/uvicorn etebase_server.asgi:application --uds {{ etebase__socket }}
+Restart=always
 
 [Install]
 WantedBy=multi-user.target
