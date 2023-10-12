@@ -1,5 +1,6 @@
-[![MIT License](https://raw.githubusercontent.com/roles-ansible/ansible_role_etebase/main/.github/license.svg)](https://github.com/roles-ansible/ansible_role_etebase/blob/main/LICENSE)
-[![Galaxy](https://raw.githubusercontent.com/roles-ansible/ansible_role_etebase/main/.github/galaxy.svg)](https://galaxy.ansible.com/do1jlr/etebase)
+[![Ansible Galaxy](https://ansible.l3d.space/svg/l3d.etebase.svg)](https://galaxy.ansible.com/ui/standalone/roles/roles-ansible/etebase/)
+[![MIT License](https://ansible.l3d.space/svg/l3d.etebase_license.svg)](LICENSE)
+[![Maintainance](https://ansible.l3d.space/svg/l3d.etebase_maintainance.svg)](https://ansible.l3d.space/#l3d.etebase)
 
  Ansible role EteBase - EteSync 2.0 Server Backend
 ===================================================

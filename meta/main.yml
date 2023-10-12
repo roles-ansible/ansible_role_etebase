@@ -1,10 +1,11 @@
 ---
 galaxy_info:
   role_name: etebase
-  author: do1jlr
+  author: l3d
+  namespace: l3d
   description: Ansible role to Setup and Confugure Etebase - The Backend from EteSync 2.0.
   license: "MIT"
-  min_ansible_version: "2.12"
+  min_ansible_version: "2.14"
   platforms:
     - name: Debian
       versions: ['all']
@@ -25,4 +26,5 @@ galaxy_info:
     - endtoend
     - tasks
     - calendar
+    - linux
 dependencies: []
