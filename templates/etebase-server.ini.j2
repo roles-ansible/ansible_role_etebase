@@ -3,7 +3,7 @@
 
 [global]
 secret_file = {{ etebase__global_secret_file }}
-debug = {{ etebase__global_debug |  ternary('true', 'false') }}
+debug = {{ etebase__global_debug | ternary('true', 'false') }}
 ;Set the paths where data will be stored at
 static_root = {{ etebase__global_static_root }}
 media_root = {{ etebase__global_media_root }}
