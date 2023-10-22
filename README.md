@@ -1,4 +1,4 @@
-[![Ansible Galaxy](https://ansible.l3d.space/svg/l3d.etebase.svg)](https://galaxy.ansible.com/ui/standalone/roles/roles-ansible/etebase/)
+[![Ansible Galaxy](https://ansible.l3d.space/svg/l3d.etebase.svg)](https://galaxy.ansible.com/ui/standalone/roles/l3d/etebase/)
 [![MIT License](https://ansible.l3d.space/svg/l3d.etebase_license.svg)](LICENSE)
 [![Maintainance](https://ansible.l3d.space/svg/l3d.etebase_maintainance.svg)](https://ansible.l3d.space/#l3d.etebase)
 
