@@ -17,14 +17,21 @@
           URI module cannot detect the latest version in this mode."
       when: ansible_check_mode and (etebase__version == 'latest' or etebase__version == 'present')
 
-    - name: "Set fact latest etebase release"
+    - name: Extract semantic version tags
       ansible.builtin.set_fact:
-        etebase_remote_version: "{{ etebase_remote_metadata.json.0.name }}"
-      when: not ansible_check_mode
+        semantic_version_tags: "{{ etebase_remote_metadata.json | selectattr('name', 'match', '^[0-9]+\\.[0-9]+\\.[0-9]+$') | list }}"
 
-    - name: "Set etebase version target (latest)"
+    - name: Sort semantic version tags
       ansible.builtin.set_fact:
-        etebase_version_target: "{{ etebase_remote_version }}"
+        sorted_semantic_version_tags: "{{ semantic_version_tags | sort(attribute='name') }}"
+
+    - name: Get the latest tag
+      ansible.builtin.set_fact:
+        etebase__latest_tag: "{{ sorted_semantic_version_tags | last }}"
+
+    - name: "Set etebase version target (latest tag)"
+      ansible.builtin.set_fact:
+        etebase_version_target: "{{ etebase__latest_tag.name }}"
       when: not ansible_check_mode
 
 - name: "Set etebase version target {{ etebase__version }}"
@@ -35,4 +42,4 @@
 - name: Print Etebase Version
   ansible.builtin.debug:
     verbosity: 1
-    msg: "Set Etebase Version to {{ etebase_version_target }}"
+    msg: "etebase version is set to {{ etebase_version_target }}"
