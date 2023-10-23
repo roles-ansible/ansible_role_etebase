@@ -1,6 +1,6 @@
 ---
 - name: Set git configuration for safe.directory
-  ansible.builtin.git_config:
+  community.general.git_config:
     scope: global
     name: safe.directory
     value: "{{ etebase__user_home }}/etebase_{{ etebase_version_target }}"
