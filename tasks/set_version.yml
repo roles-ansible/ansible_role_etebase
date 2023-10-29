@@ -39,7 +39,7 @@
     etebase_version_target: "{{ etebase__version }}"
   when: etebase__version != "latest"
 
-- name: Print Etebase Version
+- name: Print Etebase Version  # noqa: H500
   ansible.builtin.debug:
     verbosity: 1
     msg: "etebase version is set to {{ etebase_version_target }}"

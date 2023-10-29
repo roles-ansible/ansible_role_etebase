@@ -1,33 +1,43 @@
 ---
 - name: Run optional versionscheck
-  ansible.builtin.include_tasks: versioncheck.yml
+  ansible.builtin.include_tasks:
+    file: 'versioncheck.yml'
   when: submodules_versioncheck | bool
 
 - name: Create Etebase User/Group
-  ansible.builtin.include_tasks: create_user.yml
+  ansible.builtin.include_tasks:
+    file: 'create_user.yml'
 
 - name: Define Etebase Version
-  ansible.builtin.include_tasks: set_version.yml
+  ansible.builtin.include_tasks:
+    file: 'set_version.yml'
 
 - name: Run optional etebase backup
-  ansible.builtin.include_tasks: backup.yml
+  ansible.builtin.include_tasks:
+    file: 'backup.yml'
   when: etebase__create_backup | bool
 
 - name: Download Etebase Repo
-  ansible.builtin.include_tasks: download.yml
+  ansible.builtin.include_tasks:
+    file: 'download.yml'
 
 - name: Setup Virtualenv and install Requirements
-  ansible.builtin.include_tasks: python_venv.yml
+  ansible.builtin.include_tasks:
+    file: 'python_venv.yml'
 
 - name: Create Etebase Config
-  ansible.builtin.include_tasks: configure.yml
+  ansible.builtin.include_tasks:
+    file: 'configure.yml'
 
 - name: Run ./manage.py migrate
-  ansible.builtin.include_tasks: migrate.yml
+  ansible.builtin.include_tasks:
+    file: 'migrate.yml'
 
 - name: Setup Systemd Service
-  ansible.builtin.include_tasks: systemd.yml
+  ansible.builtin.include_tasks:
+    file: 'systemd.yml'
   when: etebase__systemd_setup | bool
 
 - name: Cleanup file permissions
-  ansible.builtin.include_tasks: filepermissions.yml
+  ansible.builtin.include_tasks:
+    file: 'filepermissions.yml'

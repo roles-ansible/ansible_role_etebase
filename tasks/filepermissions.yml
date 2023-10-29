@@ -8,7 +8,7 @@
     owner: "{{ etebase__user }}"
     recurse: true
     mode: 'u=rwX,g=rX,o=rX'
-  with_items:
+  loop:
     - "{{ etebase__global_static_root }}"
   notify:
     - "Systemctl restart etebase.service"
@@ -23,7 +23,7 @@
     owner: "{{ etebase__user }}"
     recurse: true
     mode: 'u=rwX,g=rX,o='
-  with_items:
+  loop:
     - "{{ etebase__global_media_root }}"
     - "{{ etebase__secrets_dir }}"
     - "{{ etebase__venv }}"
