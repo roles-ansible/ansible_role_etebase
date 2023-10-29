@@ -32,7 +32,7 @@
         recurse: true
         group: "{{ etebase__group }}"
         owner: "{{ etebase__user }}"
-      with_items:
+      loop:
         - "{{ etebase__backup_destionation }}"
         - "{{ etebase__current_backup_destination }}"
 
@@ -59,7 +59,7 @@
         recurse: true
         group: "{{ etebase__group }}"
         owner: "{{ etebase__user }}"
-      with_items:
+      loop:
         - "{{ etebase__current_backup_destination }}"
 
     - name: Backup static root dir
@@ -84,7 +84,7 @@
         dest: "{{ etebase__current_backup_destination }}"
         remote_src: true
 
-    - name: Create bz2 archive of backup
+    - name: Create bz2 archive of backup  # noqa: H1901
       become: true
       community.general.archive:
         mode: 0640

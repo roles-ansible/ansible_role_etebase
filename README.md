@@ -91,6 +91,15 @@ By the way, this role requires that the Ansible user be allowed to execute comma
     submodules_versioncheck: true
 ```
 
+
+## Requirements
+The ``community.general`` collection is required for some parts of this ansible role.
+You can install it with this command:
+```bash
+ansible-galaxy collection install -r requirements.yml --upgrade
+```
+
+
  Contributing
 --------------
 Don't hesitate to open a issue or *(even better)* create a pull request.
