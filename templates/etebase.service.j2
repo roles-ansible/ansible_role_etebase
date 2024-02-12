@@ -4,6 +4,8 @@
 Description=Execute the etebase server.
 
 [Service]
+User={{ etebase__user }}
+Group={{ etebase__group }}
 WorkingDirectory={{ etebase__user_home }}/etebase_{{ etebase_version_target }}
 ExecStart={{ etebase__venv }}/bin/uvicorn etebase_server.asgi:application --uds {{ etebase__socket }}
 Restart=always
