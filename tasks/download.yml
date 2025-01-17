@@ -1,5 +1,6 @@
 ---
 - name: Set git configuration for safe.directory  # noqa: H1901
+  become: true
   community.general.git_config:
     scope: global
     name: safe.directory
